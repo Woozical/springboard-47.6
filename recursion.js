@@ -27,8 +27,7 @@ function everyOther(str, i=0, result="") {
 }
 
 /** isPalindrome: checks whether a string is a palindrome or not. */
-// racecar
-// length - i ?
+
 function isPalindrome(str, i = 0) {
   const rI = ((str.length-1) - i);
   if (rI <= i) return true;
@@ -39,14 +38,19 @@ function isPalindrome(str, i = 0) {
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
-function findIndex(arr, val) {
-
+function findIndex(arr, val, i = 0) {
+  if (i === arr.length - 1) return -1;
+  else return arr[i] === val ? i : findIndex(arr, val, i+1);
 }
 
 /** revString: return a copy of a string, but in reverse. */
 
-function revString(str) {
-
+function revString(str, i = str.length-1, result="") {
+  if (i === 0) return (result + str[i]);
+  else{
+    result += str[i];
+    return revString(str, i-1, result);
+  }
 }
 
 /** gatherStrings: given an object, return an array of all of the string values. */
