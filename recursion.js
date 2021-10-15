@@ -1,13 +1,17 @@
 /** product: calculate the product of an array of numbers. */
 
-function product(nums) {
-
+function product(nums, i = 0) {
+  if (i === nums.length-1) return nums[i];
+  else return nums[i] * product(nums, i+1);
 }
 
 /** longest: return the length of the longest word in an array of words. */
 
-function longest(words) {
+function longest(words, i=0, long=0) {
+  const l = words[i].length > long ? words[i].length : long;
 
+  if (i === words.length-1) return l;
+  else return longest(words, i+1, l);
 }
 
 /** everyOther: return a string with every other letter. */
