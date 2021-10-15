@@ -55,15 +55,32 @@ function revString(str, i = str.length-1, result="") {
 
 /** gatherStrings: given an object, return an array of all of the string values. */
 
-function gatherStrings(obj) {
-
+function gatherStrings(obj, result=[]) {
+  for (let val of Object.values(obj)){
+    if (typeof val === 'object'){
+      gatherStrings(val, result);
+    } else if (typeof val === 'string') {
+      result.push(val);
+    }
+  }
+  return result;
 }
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
 
-function binarySearch(arr, val) {
+function binarySearch(arr, val, start = 0, end = (arr.length-1)) {
+  if (start === end) return arr[start] === val ? start : -1;
+  // "split" array
+  const mid = Math.floor((end + start) * 0.5);
+  if (arr[mid] === val) return mid;
 
+  // recursive search
+  if (val > arr[mid]){
+    return binarySearch(arr, val, mid+1, end);
+  } else {
+    return binarySearch(arr, val, start, mid);
+  }
 }
 
 module.exports = {
