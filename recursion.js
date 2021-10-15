@@ -16,14 +16,25 @@ function longest(words, i=0, long=0) {
 
 /** everyOther: return a string with every other letter. */
 
-function everyOther(str) {
-
+function everyOther(str, i=0, result="") {
+  if (i >= str.length-1){
+    result = i < str.length ? (result + str[i]) : result;
+    return result;
+  } else {
+    result += str[i];
+    return everyOther(str, i+2, result);
+  }
 }
 
 /** isPalindrome: checks whether a string is a palindrome or not. */
-
-function isPalindrome(str) {
-
+// racecar
+// length - i ?
+function isPalindrome(str, i = 0) {
+  const rI = ((str.length-1) - i);
+  if (rI <= i) return true;
+  else{
+    return str[i] === str[rI] ? isPalindrome(str, i+1) : false;
+  }
 }
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
